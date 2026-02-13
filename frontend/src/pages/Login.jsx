@@ -19,16 +19,17 @@ function Login() {
       localStorage.setItem("token", res.data.token);
 
       alert("Login successful");
-      navigate("/dashboard");
+      navigate("/home");
+
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+    <div className="container">
+    <h2>Login</h2>
+    <form onSubmit={handleLogin}>
         <div>
           <input
             type="email"

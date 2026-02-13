@@ -1,37 +1,55 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
+import Layout from "./components/Layout";
+import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
-
 
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Login />} />
+        {/* Public */}
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* Protected */}
+        <Route
+          path="/home"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Home />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
 
         <Route
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Layout>
+                <Dashboard />
+              </Layout>
             </PrivateRoute>
           }
         />
-        <Route
-  path="/reports"
-  element={
-    <PrivateRoute>
-      <Reports />
-    </PrivateRoute>
-  }
-/>
 
+        <Route
+          path="/reports"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Reports />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );

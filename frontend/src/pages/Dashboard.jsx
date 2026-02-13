@@ -10,9 +10,9 @@ function Dashboard() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Dashboard</h2>
-      <p>Welcome to the maintenance system.</p>
+    <div className="container">
+      <h2>Maintenance Dashboard</h2>
+      <p>Submit and manage maintenance requests.</p>
 
       <RequestForm onRequestAdded={handleRequestAdded} />
       <RequestList key={refresh} />

@@ -1,0 +1,42 @@
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #1f2937;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+.sidebar button {
+  margin-top: auto;
+  padding: 8px;
+  background: #ef4444;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.main-content {
+  flex: 1;
+  padding: 30px;
+  background: #f4f6f8;
+}
