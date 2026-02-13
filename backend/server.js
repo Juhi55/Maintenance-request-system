@@ -16,6 +16,10 @@ app.use(express.json());
 const authRoutes = require("./routes/authRoutes");
 app.use("/api/auth", authRoutes);
 
+const maintenanceRoutes = require("./routes/maintenanceRoutes");
+app.use("/api/maintenance", maintenanceRoutes);
+
+
 const protect = require("./middleware/authMiddleware");
 
 app.get("/api/protected", protect, (req, res) => {
