@@ -1,0 +1,22 @@
+[33m7424326[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Protect dashboard route using PrivateRoute component
+[33m2f92f93[m Add login and register forms with backend integration
+[33m3b41aa7[m Setup React layout with routing and basic pages
+[33mee820d7[m Add role-based middleware for admin access control
+[33mfc5f2c5[m Add role-based middleware for admin access control
+[33mcce009d[m Add JWT authentication middleware
+[33m2590eca[m Add JWT authentication middleware
+[33m44be61b[m Implement login API with JWT authentication
+[33mc76f4c1[m Implement login API with JWT authentication
+[33m0568cdc[m Implement login API with JWT authentication
+[33m3922331[m Add register API for user authentication
+[33m10724dc[m Register API
+[33m9bd9791[m Commit 7: Register API
+[33m22df9ff[m created models and user.js file
+[33m85787a8[m Connect backend to local MongoDB
+[33m305be93[m Connect backend to local MongoDB
+[33m2b60a79[m Connect backend to local MongoDB
+[33mbb4a351[m Setup Express backend server
+[33m6a0eca4[m Add backend folder structure
+[33me18331b[m Setup React frontend using Vite
+[33m4603bc2[m Update README.md
+[33mb6f1f4f[m first commit
