@@ -26,6 +26,16 @@ app.get("/api/protected", protect, (req, res) => {
 });
 
 
+const adminOnly = require("./middleware/roleMiddleware");
+
+app.get("/api/admin", protect, adminOnly, (req, res) => {
+  res.json({
+    message: "Admin route accessed",
+    user: req.user,
+  });
+});
+
+
 // Test route
 app.get("/", (req, res) => {
   res.send("Maintenance Request API running");
