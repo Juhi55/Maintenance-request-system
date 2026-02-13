@@ -4,6 +4,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import Reports from "./pages/Reports";
+
 
 function App() {
   return (
@@ -21,6 +23,15 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+  path="/reports"
+  element={
+    <PrivateRoute>
+      <Reports />
+    </PrivateRoute>
+  }
+/>
+
       </Routes>
     </Router>
   );
