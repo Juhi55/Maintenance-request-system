@@ -17,6 +17,31 @@ function RequestList() {
     fetchRequests();
   }, []);
 
+  // Delete request
+  const handleDelete = async (id) => {
+    try {
+      await API.delete(`/maintenance/${id}`);
+      fetchRequests();
+    } catch (err) {
+      alert("Error deleting request");
+    }
+  };
+
+  // Edit request (simple prompt-based edit)
+  const handleEdit = async (req) => {
+    const newTitle = prompt("Enter new title", req.title);
+    if (!newTitle) return;
+
+    try {
+      await API.put(`/maintenance/${req._id}`, {
+        title: newTitle,
+      });
+      fetchRequests();
+    } catch (err) {
+      alert("Error updating request");
+    }
+  };
+
   return (
     <div style={{ marginTop: "30px" }}>
       <h3>Maintenance Requests</h3>
@@ -37,8 +62,16 @@ function RequestList() {
           <p>Priority: {req.priority}</p>
           <p>Status: {req.status}</p>
 
-          <button style={{ marginRight: "10px" }}>Edit</button>
-          <button>Delete</button>
+          <button
+            style={{ marginRight: "10px" }}
+            onClick={() => handleEdit(req)}
+          >
+            Edit
+          </button>
+
+          <button onClick={() => handleDelete(req._id)}>
+            Delete
+          </button>
         </div>
       ))}
     </div>
