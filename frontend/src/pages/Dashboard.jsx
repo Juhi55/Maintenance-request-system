@@ -1,4 +1,5 @@
 import RequestForm from "../components/RequestForm";
+import RequestList from "../components/RequestList";
 
 function Dashboard() {
   return (
@@ -7,6 +8,7 @@ function Dashboard() {
       <p>Welcome to the maintenance system.</p>
 
       <RequestForm />
+      <RequestList />
     </div>
   );
 }
