@@ -1,29 +1,31 @@
+import { useEffect, useState } from "react";
+import API from "../services/api";
+
 function RequestList() {
-  // Temporary dummy data
-  const requests = [
-    {
-      id: 1,
-      title: "AC not working",
-      location: "Room 101",
-      priority: "High",
-      status: "Pending",
-    },
-    {
-      id: 2,
-      title: "Broken chair",
-      location: "Lab 2",
-      priority: "Medium",
-      status: "Pending",
-    },
-  ];
+  const [requests, setRequests] = useState([]);
+
+  const fetchRequests = async () => {
+    try {
+      const res = await API.get("/maintenance");
+      setRequests(res.data);
+    } catch (err) {
+      console.error("Error fetching requests");
+    }
+  };
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
 
   return (
     <div style={{ marginTop: "30px" }}>
       <h3>Maintenance Requests</h3>
 
+      {requests.length === 0 && <p>No requests found.</p>}
+
       {requests.map((req) => (
         <div
-          key={req.id}
+          key={req._id}
           style={{
             border: "1px solid #ccc",
             padding: "10px",

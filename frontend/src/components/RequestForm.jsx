@@ -1,29 +1,38 @@
 import { useState } from "react";
+import API from "../services/api";
 
-function RequestForm() {
+function RequestForm({ onRequestAdded }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [priority, setPriority] = useState("Low");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // For now, just log the data
-    console.log({
-      title,
-      description,
-      location,
-      priority,
-    });
+    try {
+      const res = await API.post("/maintenance", {
+        title,
+        description,
+        location,
+        priority,
+      });
 
-    alert("Request submitted");
+      alert("Request created");
 
-    // Clear form
-    setTitle("");
-    setDescription("");
-    setLocation("");
-    setPriority("Low");
+      // Clear form
+      setTitle("");
+      setDescription("");
+      setLocation("");
+      setPriority("Low");
+
+      // Notify dashboard
+      if (onRequestAdded) {
+        onRequestAdded(res.data);
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || "Error creating request");
+    }
   };
 
   return (
