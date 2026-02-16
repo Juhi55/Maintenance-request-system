@@ -109,3 +109,116 @@ body {
   margin-top: 12px;
   font-size: 14px;
 }
+
+/* Request card */
+.request-card {
+  background: white;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Status badges */
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.status-pending {
+  background: #fde68a;
+  color: #92400e;
+}
+
+.status-progress {
+  background: #93c5fd;
+  color: #1e3a8a;
+}
+
+.status-completed {
+  background: #86efac;
+  color: #065f46;
+}
+
+/* Request list container */
+.request-list {
+  margin-top: 30px;
+}
+
+.request-title {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #1d2b64;
+}
+
+/* Request card */
+.request-card {
+  background: white;
+  padding: 18px;
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.request-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+}
+
+/* Request header */
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.request-header h4 {
+  margin: 0;
+  font-size: 18px;
+  color: #1d2b64;
+}
+
+/* Request details */
+.request-details p {
+  margin: 4px 0;
+  color: #555;
+  font-size: 14px;
+}
+
+/* Priority badges */
+.priority {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.priority-Low {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.priority-Medium {
+  background: #fde68a;
+  color: #92400e;
+}
+
+.priority-High {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+/* Status badges */
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+

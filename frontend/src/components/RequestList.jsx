@@ -23,48 +23,54 @@ function RequestList({ requests: externalRequests }) {
   }, [externalRequests]);
 
   return (
-    <div style={{ marginTop: "30px" }}>
-      <h3>Maintenance Requests</h3>
+    <div className="request-list">
+      <h3 className="request-title">Maintenance Requests</h3>
 
       {requests.length === 0 && <p>No requests found.</p>}
 
       {requests.map((req) => (
-        <div
-          key={req._id}
-          style={{
-            border: "1px solid #ccc",
-            padding: "15px",
-            marginBottom: "12px",
-            background: "#fff",
-            borderRadius: "8px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-          }}
-        >
-          <h4>{req.title}</h4>
+        <div key={req._id} className="request-card">
+          <div className="request-header">
+            <h4>{req.title}</h4>
 
-          <p>
-            <strong>Description:</strong> {req.description}
-          </p>
+            {/* Priority badge */}
+            <span className={`priority priority-${req.priority}`}>
+              {req.priority}
+            </span>
+          </div>
 
-          <p>
-            <strong>Location:</strong> {req.location}
-          </p>
-
-          <p>
-            <strong>Priority:</strong> {req.priority}
-          </p>
-
-          <p>
-            <strong>Status:</strong> {req.status}
-          </p>
-
-          {/* Show user info only for admin */}
-          {role === "admin" && req.createdBy && (
+          <div className="request-details">
             <p>
-              <strong>User:</strong> {req.createdBy.name} (
-              {req.createdBy.email})
+              <strong>Description:</strong> {req.description}
             </p>
-          )}
+
+            <p>
+              <strong>Location:</strong> {req.location}
+            </p>
+
+            <p>
+              <strong>Status: </strong>
+              <span
+                className={`status ${
+                  req.status === "Pending"
+                    ? "status-pending"
+                    : req.status === "In Progress"
+                    ? "status-progress"
+                    : "status-completed"
+                }`}
+              >
+                {req.status}
+              </span>
+            </p>
+
+            {/* Admin-only user info */}
+            {role === "admin" && req.createdBy && (
+              <p>
+                <strong>User:</strong> {req.createdBy.name} (
+                {req.createdBy.email})
+              </p>
+            )}
+          </div>
         </div>
       ))}
     </div>
