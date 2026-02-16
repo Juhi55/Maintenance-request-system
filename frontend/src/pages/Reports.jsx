@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import "../pages/dashboard.css"; // reuse card styling
+import "../index.css";
 
 function Reports() {
   const [report, setReport] = useState(null);
+  const [filter, setFilter] = useState(null);
 
   const fetchReport = async () => {
     try {
@@ -19,77 +22,123 @@ function Reports() {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      await API.put(`/maintenance/${id}`, {
-        status: newStatus,
-      });
-      fetchReport(); // refresh data
+      await API.put(`/maintenance/${id}`, { status: newStatus });
+      fetchReport();
     } catch (err) {
       alert("Error updating status");
     }
   };
 
+  const deleteRequest = async (id) => {
+    if (!window.confirm("Delete this request?")) return;
+
+    try {
+      await API.delete(`/maintenance/${id}`);
+      fetchReport();
+    } catch (err) {
+      alert("Error deleting request");
+    }
+  };
+
   if (!report) return <p>Loading report...</p>;
 
-  return (
-    <div className="container">
-      <h2>Admin Reports</h2>
+  // filtering
+  let filtered = [];
+  if (filter === "all") filtered = report.requests;
+  if (filter === "pending")
+    filtered = report.requests.filter((r) => r.status === "Pending");
+  if (filter === "completed")
+    filtered = report.requests.filter((r) => r.status === "Completed");
 
-      <div style={{ marginBottom: "20px" }}>
-        <p><strong>Total:</strong> {report.total}</p>
-        <p><strong>Pending:</strong> {report.pending}</p>
-        <p><strong>In Progress:</strong> {report.inProgress}</p>
-        <p><strong>Completed:</strong> {report.completed}</p>
+  return (
+    <div className="dashboard">
+      <h2>Admin Reports</h2>
+      <p>Overview of all maintenance requests.</p>
+
+      {/* Stats cards */}
+      <div className="stats">
+        <div className="card">
+          <h3>{report.total}</h3>
+          <p>Total Requests</p>
+          <button onClick={() => setFilter("all")}>View</button>
+        </div>
+
+        <div className="card">
+          <h3>{report.pending}</h3>
+          <p>Pending</p>
+          <button onClick={() => setFilter("pending")}>View</button>
+        </div>
+
+        <div className="card">
+          <h3>{report.completed}</h3>
+          <p>Completed</p>
+          <button onClick={() => setFilter("completed")}>View</button>
+        </div>
       </div>
 
-      <h3>All Requests</h3>
+      {/* Request list */}
+      {filter && (
+        <div className="request-list">
+          <h3 className="request-title">Requests</h3>
 
-      {report.requests.length === 0 && <p>No requests found.</p>}
+          {filtered.length === 0 && <p>No requests found.</p>}
 
-      {report.requests.map((req) => (
-        <div
-          key={req._id}
-          style={{
-            background: "#fff",
-            padding: "15px",
-            marginBottom: "12px",
-            borderRadius: "8px",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-          }}
-        >
-          <h4>{req.title}</h4>
+          {filtered.map((req) => (
+            <div key={req._id} className="request-card">
+              <div className="request-header">
+                <h4>{req.title}</h4>
+                <span className={`priority priority-${req.priority}`}>
+                  {req.priority}
+                </span>
+              </div>
 
-          <p>
-            <strong>Description:</strong> {req.description}
-          </p>
+              <div className="request-details">
+                <p>
+                  <strong>Description:</strong> {req.description}
+                </p>
 
-          <p>
-            <strong>Location:</strong> {req.location}
-          </p>
+                <p>
+                  <strong>Location:</strong> {req.location}
+                </p>
 
-          <p>
-            <strong>Priority:</strong> {req.priority}
-          </p>
+                <p>
+                  <strong>User:</strong> {req.createdBy?.name} (
+                  {req.createdBy?.email})
+                </p>
 
-          <p>
-            <strong>Requested by:</strong>{" "}
-            {req.createdBy?.name} ({req.createdBy?.email})
-          </p>
+                <p>
+                  <strong>Status: </strong>
+                  <select
+                    value={req.status}
+                    onChange={(e) =>
+                      updateStatus(req._id, e.target.value)
+                    }
+                  >
+                    <option>Pending</option>
+                    <option>In Progress</option>
+                    <option>Completed</option>
+                  </select>
+                </p>
 
-          <div style={{ marginTop: "10px" }}>
-            <strong>Status:</strong>{" "}
-            <select
-              value={req.status}
-              onChange={(e) =>
-                updateStatus(req._id, e.target.value)
-              }
-            >
-              <option>Pending</option>
-              <option>In Progress</option>
-              <option>Completed</option>
-            </select>
-          </div>
+                <button
+                  style={{
+                    marginTop: "10px",
+                    background: "#ef4444",
+                    color: "white",
+                    border: "none",
+                    padding: "6px 12px",
+                    borderRadius: "6px",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => deleteRequest(req._id)}
+                >
+                  Delete Request
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }
