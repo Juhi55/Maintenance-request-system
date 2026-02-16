@@ -3,33 +3,36 @@ import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [role, setRole] = useState("user");
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
     try {
       await API.post("/auth/register", {
         name,
         email,
         password,
-        role: "user",
+        role,
       });
 
-      alert("Registration successful");
-      navigate("/");
+      alert("Registration successful. Please login.");
+      navigate("/login");
     } catch (err) {
-      alert(err.response?.data?.message || "Registration failed");
+      alert("Registration failed");
     }
   };
 
   return (
-    <div className="container">
-      <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <div>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Register</h2>
+        <form onSubmit={handleRegister}>
           <input
             type="text"
             placeholder="Name"
@@ -37,9 +40,7 @@ function Register() {
             onChange={(e) => setName(e.target.value)}
             required
           />
-        </div>
-        <br />
-        <div>
+
           <input
             type="email"
             placeholder="Email"
@@ -47,9 +48,7 @@ function Register() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <br />
-        <div>
+
           <input
             type="password"
             placeholder="Password"
@@ -57,10 +56,16 @@ function Register() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <br />
-        <button type="submit">Register</button>
-      </form>
+
+
+          <button type="submit">Register</button>
+        </form>
+
+        <p>
+          Already have an account?{" "}
+          <a href="/login">Login</a>
+        </p>
+      </div>
     </div>
   );
 }
