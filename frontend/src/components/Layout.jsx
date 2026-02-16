@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { FaHome, FaPlus, FaChartBar, FaSignOutAlt } from "react-icons/fa";
 import "./layout.css";
 
 function Layout({ children }) {
@@ -8,7 +9,7 @@ function Layout({ children }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -16,19 +17,29 @@ function Layout({ children }) {
       <div className="sidebar">
         <h2>System</h2>
 
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/dashboard">
+          <FaHome style={{ marginRight: "8px" }} />
+          Dashboard
+        </Link>
 
-        {/* Only user can create request */}
         {role === "user" && (
-          <Link to="/create">Create Request</Link>
+          <Link to="/create">
+            <FaPlus style={{ marginRight: "8px" }} />
+            Create Request
+          </Link>
         )}
 
-        {/* Only admin sees reports */}
         {role === "admin" && (
-          <Link to="/reports">Reports</Link>
+          <Link to="/reports">
+            <FaChartBar style={{ marginRight: "8px" }} />
+            Reports
+          </Link>
         )}
 
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleLogout}>
+          <FaSignOutAlt style={{ marginRight: "6px" }} />
+          Logout
+        </button>
       </div>
 
       <div className="main-content">{children}</div>
