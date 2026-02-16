@@ -15,7 +15,10 @@ function Layout({ children }) {
   return (
     <div className="app-layout">
       <div className="sidebar">
-        <h2>System</h2>
+        <Link to="/" className="logo">
+         MaintainPro
+         </Link>
+
 
         <Link to="/dashboard">
           <FaHome style={{ marginRight: "8px" }} />

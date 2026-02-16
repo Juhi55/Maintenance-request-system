@@ -55,3 +55,13 @@
   background: #f4f6f8;
   box-sizing: border-box;
 }
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1d2b64;
+  text-decoration: none;
+  margin-bottom: 25px;
+  display: block;
+}
+
