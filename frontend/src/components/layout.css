@@ -1,31 +1,35 @@
+/* Main layout */
 .app-layout {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
+/* Sidebar */
 .sidebar {
   width: 220px;
-  background: #1f2937;
+  background: linear-gradient(to bottom, #3c517d, #273a67);
   color: white;
   padding: 20px;
   display: flex;
   flex-direction: column;
 }
 
-.sidebar h2 {
-  margin-bottom: 20px;
-}
-
+/* Sidebar links */
 .sidebar a {
   color: white;
   text-decoration: none;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
 }
 
 .sidebar a:hover {
-  text-decoration: underline;
+  background: rgba(255, 255, 255, 0.15);
 }
 
+/* Logout button */
 .sidebar button {
   margin-top: auto;
   padding: 8px;
@@ -33,10 +37,15 @@
   border: none;
   color: white;
   cursor: pointer;
+  border-radius: 6px;
 }
 
+/* Main content */
 .main-content {
   flex: 1;
+  height: 100vh;
+  overflow-y: auto;   /* only content scrolls */
   padding: 30px;
   background: #f4f6f8;
+  box-sizing: border-box;
 }
