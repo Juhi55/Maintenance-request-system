@@ -15,8 +15,15 @@ function Layout({ children }) {
     <div className="app-layout">
       <div className="sidebar">
         <h2>System</h2>
+
         <Link to="/dashboard">Dashboard</Link>
 
+        {/* Only user can create request */}
+        {role === "user" && (
+          <Link to="/create">Create Request</Link>
+        )}
+
+        {/* Only admin sees reports */}
         {role === "admin" && (
           <Link to="/reports">Reports</Link>
         )}
