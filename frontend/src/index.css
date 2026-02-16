@@ -222,3 +222,54 @@ body {
   font-weight: 600;
 }
 
+/* Create request page */
+.create-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+.create-card {
+  background: white;
+  padding: 30px;
+  width: 420px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.create-card h2 {
+  margin-bottom: 20px;
+  color: #1d2b64;
+  text-align: center;
+}
+
+/* Form fields */
+.create-card input,
+.create-card textarea,
+.create-card select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Submit button */
+.create-card button {
+  width: 100%;
+  padding: 10px;
+  background: #1d2b64;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.create-card button:hover {
+  background: #0f172a;
+}
+
