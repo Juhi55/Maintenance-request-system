@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 
-function RequestList() {
+function RequestList({ requests: externalRequests }) {
   const [requests, setRequests] = useState([]);
 
   const fetchRequests = async () => {
@@ -14,10 +14,13 @@ function RequestList() {
   };
 
   useEffect(() => {
-    fetchRequests();
-  }, []);
+    if (externalRequests) {
+      setRequests(externalRequests);
+    } else {
+      fetchRequests();
+    }
+  }, [externalRequests]);
 
-  // Delete request
   const handleDelete = async (id) => {
     try {
       await API.delete(`/maintenance/${id}`);
@@ -27,7 +30,6 @@ function RequestList() {
     }
   };
 
-  // Edit request (simple prompt-based edit)
   const handleEdit = async (req) => {
     const newTitle = prompt("Enter new title", req.title);
     if (!newTitle) return;
@@ -55,6 +57,8 @@ function RequestList() {
             border: "1px solid #ccc",
             padding: "10px",
             marginBottom: "10px",
+            background: "#fff",
+            borderRadius: "6px",
           }}
         >
           <h4>{req.title}</h4>

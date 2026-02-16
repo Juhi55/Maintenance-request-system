@@ -4,7 +4,6 @@ import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Reports from "./pages/Reports";
 
@@ -18,17 +17,6 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         {/* Protected */}
-        <Route
-          path="/home"
-          element={
-            <PrivateRoute>
-              <Layout>
-                <Home />
-              </Layout>
-            </PrivateRoute>
-          }
-        />
-
         <Route
           path="/dashboard"
           element={

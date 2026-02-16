@@ -3,9 +3,11 @@ import "./layout.css";
 
 function Layout({ children }) {
   const navigate = useNavigate();
+  const role = localStorage.getItem("role");
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     navigate("/");
   };
 
@@ -13,9 +15,12 @@ function Layout({ children }) {
     <div className="app-layout">
       <div className="sidebar">
         <h2>System</h2>
-        <Link to="/home">Home</Link>
         <Link to="/dashboard">Dashboard</Link>
-        <Link to="/reports">Reports</Link>
+
+        {role === "admin" && (
+          <Link to="/reports">Reports</Link>
+        )}
+
         <button onClick={handleLogout}>Logout</button>
       </div>
 

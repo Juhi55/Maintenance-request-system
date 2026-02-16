@@ -17,9 +17,13 @@ function Login() {
 
       // Store token
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.user.role);
+;
+;
 
       alert("Login successful");
-      navigate("/home");
+      navigate("/dashboard");
+;
 
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
