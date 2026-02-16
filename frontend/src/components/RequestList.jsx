@@ -3,6 +3,7 @@ import API from "../services/api";
 
 function RequestList({ requests: externalRequests }) {
   const [requests, setRequests] = useState([]);
+  const role = localStorage.getItem("role");
 
   const fetchRequests = async () => {
     try {
@@ -21,29 +22,6 @@ function RequestList({ requests: externalRequests }) {
     }
   }, [externalRequests]);
 
-  const handleDelete = async (id) => {
-    try {
-      await API.delete(`/maintenance/${id}`);
-      fetchRequests();
-    } catch (err) {
-      alert("Error deleting request");
-    }
-  };
-
-  const handleEdit = async (req) => {
-    const newTitle = prompt("Enter new title", req.title);
-    if (!newTitle) return;
-
-    try {
-      await API.put(`/maintenance/${req._id}`, {
-        title: newTitle,
-      });
-      fetchRequests();
-    } catch (err) {
-      alert("Error updating request");
-    }
-  };
-
   return (
     <div style={{ marginTop: "30px" }}>
       <h3>Maintenance Requests</h3>
@@ -55,27 +33,38 @@ function RequestList({ requests: externalRequests }) {
           key={req._id}
           style={{
             border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px",
+            padding: "15px",
+            marginBottom: "12px",
             background: "#fff",
-            borderRadius: "6px",
+            borderRadius: "8px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
           }}
         >
           <h4>{req.title}</h4>
-          <p>Location: {req.location}</p>
-          <p>Priority: {req.priority}</p>
-          <p>Status: {req.status}</p>
 
-          <button
-            style={{ marginRight: "10px" }}
-            onClick={() => handleEdit(req)}
-          >
-            Edit
-          </button>
+          <p>
+            <strong>Description:</strong> {req.description}
+          </p>
 
-          <button onClick={() => handleDelete(req._id)}>
-            Delete
-          </button>
+          <p>
+            <strong>Location:</strong> {req.location}
+          </p>
+
+          <p>
+            <strong>Priority:</strong> {req.priority}
+          </p>
+
+          <p>
+            <strong>Status:</strong> {req.status}
+          </p>
+
+          {/* Show user info only for admin */}
+          {role === "admin" && req.createdBy && (
+            <p>
+              <strong>User:</strong> {req.createdBy.name} (
+              {req.createdBy.email})
+            </p>
+          )}
         </div>
       ))}
     </div>
