@@ -24,7 +24,7 @@ function RequestList({ requests: externalRequests }) {
 
   return (
     <div className="request-list">
-      <h3 className="request-title">Maintenance Requests</h3>
+      
 
       {requests.length === 0 && <p>No requests found.</p>}
 
