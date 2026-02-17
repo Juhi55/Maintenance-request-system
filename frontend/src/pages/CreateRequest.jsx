@@ -112,7 +112,7 @@ function CreateRequest() {
 
         {/* ── Header banner ── */}
         <div style={{
-          background: "linear-gradient(135deg, #1d2b64 0%, #f8cdda 100%)",
+          background: "linear-gradient(135deg,  #0d1f2d 50%,rgba(255, 255, 255, 0.07))",
           padding: "32px 36px 28px",
           position: "relative",
           overflow: "hidden",
@@ -126,7 +126,7 @@ function CreateRequest() {
           <div style={{
             position: "absolute", bottom: "-20px", left: "30%",
             width: "80px", height: "80px", borderRadius: "50%",
-            background: "rgba(35, 15, 42, 0.15)", pointerEvents: "none",
+            background: "rgba(183, 179, 184, 0.15)", pointerEvents: "none",
           }} />
 
           <div style={{ position: "relative" }}>
